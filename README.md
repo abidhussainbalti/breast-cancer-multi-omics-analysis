@@ -102,7 +102,9 @@ Dataset: GSE183947 (30 tumor + 30 normal pairs, Guangzhou Medical University)
 
 
 ```
+
 ## Repository Structure
+
 ```
 breast-cancer-multi-omics-analysis/
 ├── README.md
@@ -162,6 +164,7 @@ breast-cancer-multi-omics-analysis/
 │       ├── integrated_evidence_table.csv
 │       └── eQTL_diagram.png
 └── report
+
 ```
 
 ## Datasets Used
