@@ -56,22 +56,58 @@
 ---
 
 ## 🔄 Pipeline Overview
-
-**RNA-seq Raw Reads (GSE183947)** — 12 samples: 6 tumor + 6 normal
-
-&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 1** — STAR Alignment + featureCounts → Count Matrix (59,251 genes x 12 samples)
-
-&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 2** — DESeq2 → 942 significant DEGs (padj < 0.01)
-
-&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 3** — clusterProfiler → 304 GO Terms + 9 KEGG Pathways
-
-&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 4** — multiMiR → 90,452 miRNA-Gene Interactions
-
-&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 5** — ChIPseeker (FOXA1 ChIP-seq) → 670 DEGs bound by FOXA1
-
-&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 6** — qqman (GWAS) → 20,994 Significant Breast Cancer SNPs
-
-&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 7** — Multi-Omics Integration → 624 Candidate Cancer Driver Genes
++--------------------------------------------------+
+|       RNA-seq Raw Reads (GSE183947)              |
+|       12 samples: 6 tumor + 6 normal             |
++--------------------------------------------------+
+|
+v
++--------------------------------------------------+
+|  Task 1: Alignment and Quantification            |
+|  Tools : STAR v2.7.11b + featureCounts           |
+|  Output: Count Matrix (59,251 genes x 12 samples)|
++--------------------------------------------------+
+|
+v
++--------------------------------------------------+
+|  Task 2: Differential Gene Expression            |
+|  Tool  : DESeq2                                  |
+|  Output: 942 significant DEGs (padj < 0.01)      |
++--------------------------------------------------+
+|
+v
++--------------------------------------------------+
+|  Task 3: Pathway Enrichment Analysis             |
+|  Tool  : clusterProfiler                         |
+|  Output: 304 GO Terms + 9 KEGG Pathways          |
++--------------------------------------------------+
+|
+v
++--------------------------------------------------+
+|  Task 4: ncRNA Regulatory Network                |
+|  Tool  : multiMiR                                |
+|  Output: 90,452 miRNA-Gene Interactions          |
++--------------------------------------------------+
+|
+v
++--------------------------------------------------+
+|  Task 5: ChIP-seq Binding Analysis               |
+|  Tool  : ChIPseeker (FOXA1 ENCODE dataset)       |
+|  Output: 670 DEGs bound by FOXA1                 |
++--------------------------------------------------+
+|
+v
++--------------------------------------------------+
+|  Task 6: GWAS SNP Analysis                       |
+|  Tool  : qqman                                   |
+|  Output: 20,994 Significant Breast Cancer SNPs   |
++--------------------------------------------------+
+|
+v
++--------------------------------------------------+
+|  Task 7: Multi-Omics Integration                 |
+|  Output: 624 Candidate Cancer Driver Genes       |
++--------------------------------------------------+
 
 ---
 
