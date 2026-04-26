@@ -168,6 +168,14 @@ breast-cancer-multi-omics-analysis/
 ```
 
 ## Datasets Used
+## 📊 Data Sources
+```
+| Task   | Dataset ID  | Source       | Description                                             |
+| ------ | ----------- | ------------ | ------------------------------------------------------- |
+| Task 1 | GSE183947   | NCBI GEO     | RNA-seq dataset for breast cancer (12 samples)          |
+| Task 5 | ENCFF396BZQ | ENCODE       | FOXA1 ChIP-seq dataset in MCF-7 breast cancer cell line |
+| Task 6 | GCST004988  | GWAS Catalog | Breast cancer GWAS dataset (~139,274 samples)           |
+```
 ```
 | Task | Dataset | Source | Description |
 |------|---------|--------|-------------|
