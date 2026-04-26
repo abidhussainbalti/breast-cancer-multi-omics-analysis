@@ -4,16 +4,16 @@ A comprehensive multi-omics analysis pipeline to investigate breast cancer by in
 
 ## Project Summary
 
-```This repository presents a step-by-step computational workflow covering:
-
+This repository presents a step-by-step computational workflow covering:
+```
 RNA-seq alignment and quantification
 Differential gene expression analysis
 Functional enrichment (GO & KEGG)
 ncRNA–miRNA regulatory network construction
 ChIP-seq (FOXA1) binding analysis
 GWAS-based SNP analysis
-Multi-omics data integration```
-
+Multi-omics data integration
+```
 ## Key Findings
 
 - **942 differentially expressed genes** identified between tumor and normal breast tissue
@@ -29,7 +29,8 @@ Multi-omics data integration```
 Dataset: GSE183947 (30 tumor + 30 normal pairs, Guangzhou Medical University)
 
 ## Pipeline Overview
-```RNA-seq Raw Reads (GSE183947)
+```
+RNA-seq Raw Reads (GSE183947)
 ↓ Task 1: STAR Alignment + featureCounts
 Count Matrix (59,251 genes x 12 samples)
 ↓ Task 2: DESeq2
@@ -43,10 +44,10 @@ Count Matrix (59,251 genes x 12 samples)
 ↓ Task 6: GWAS Analysis
 20,994 Significant Breast Cancer SNPs
 ↓ Task 7: Multi-Omics Integration
-624 Candidate Cancer Driver Genes```
-
+624 Candidate Cancer Driver Genes
+```
 ## Repository Structure
-````breast-cancer-multi-omics-analysis/
+```breast-cancer-multi-omics-analysis/
 ├── README.md
 ├── METHODOLOGY.md
 ├── .gitignore
@@ -103,7 +104,7 @@ Count Matrix (59,251 genes x 12 samples)
 │       ├── candidate_genes.csv
 │       ├── integrated_evidence_table.csv
 │       └── eQTL_diagram.png
-└── report````
+└── report```
 
 ## Datasets Used
 ```
@@ -117,7 +118,7 @@ Count Matrix (59,251 genes x 12 samples)
 Full download instructions: [datasets/DATA_SOURCES.md](datasets/DATA_SOURCES.md)
 
 ## Tools and Software
-````
+```
 
 | Tool | Version | Purpose |
 |------|---------|---------|
@@ -130,7 +131,7 @@ Full download instructions: [datasets/DATA_SOURCES.md](datasets/DATA_SOURCES.md)
 | multiMiR | 1.24 | miRNA interactions |
 | ChIPseeker | 1.38 | ChIP-seq annotation |
 | qqman | 0.1.9 | GWAS visualization |
-````
+```
 ## How To Run
 
 ### Install R Packages
