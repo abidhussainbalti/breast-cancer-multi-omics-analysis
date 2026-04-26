@@ -1,10 +1,18 @@
 # Breast Cancer Multi-Omics Analysis
 
-A comprehensive multi-omics bioinformatics pipeline for identifying key regulatory mechanisms in breast cancer using RNA-seq, ChIP-seq, GWAS, and ncRNA data integration.
+A comprehensive multi-omics analysis pipeline to investigate breast cancer by integrating RNA-seq, ChIP-seq, GWAS, and regulatory network data. This project identifies key genes, pathways, and regulatory mechanisms involved in breast cancer progression.
 
 ## Project Summary
 
-This project investigates the molecular mechanisms of breast cancer by integrating multiple genomic data types. Starting from raw RNA-seq reads, we identify differentially expressed genes, their regulatory miRNAs, transcription factor binding sites, and associated genetic variants — ultimately building a complete regulatory model of breast cancer.
+```This repository presents a step-by-step computational workflow covering:
+
+RNA-seq alignment and quantification
+Differential gene expression analysis
+Functional enrichment (GO & KEGG)
+ncRNA–miRNA regulatory network construction
+ChIP-seq (FOXA1) binding analysis
+GWAS-based SNP analysis
+Multi-omics data integration```
 
 ## Key Findings
 
@@ -21,7 +29,7 @@ This project investigates the molecular mechanisms of breast cancer by integrati
 Dataset: GSE183947 (30 tumor + 30 normal pairs, Guangzhou Medical University)
 
 ## Pipeline Overview
-RNA-seq Raw Reads (GSE183947)
+```RNA-seq Raw Reads (GSE183947)
 ↓ Task 1: STAR Alignment + featureCounts
 Count Matrix (59,251 genes x 12 samples)
 ↓ Task 2: DESeq2
@@ -35,7 +43,7 @@ Count Matrix (59,251 genes x 12 samples)
 ↓ Task 6: GWAS Analysis
 20,994 Significant Breast Cancer SNPs
 ↓ Task 7: Multi-Omics Integration
-624 Candidate Cancer Driver Genes
+624 Candidate Cancer Driver Genes```
 
 ## Repository Structure
 ````breast-cancer-multi-omics-analysis/
@@ -98,16 +106,18 @@ Count Matrix (59,251 genes x 12 samples)
 └── report````
 
 ## Datasets Used
+```
 
 | Task | Dataset | Source | Description |
 |------|---------|--------|-------------|
 | Task 1 | GSE183947 | NCBI GEO | Breast cancer RNA-seq, 12 samples |
 | Task 5 | ENCFF396BZQ | ENCODE | FOXA1 ChIP-seq in MCF-7 cells |
 | Task 6 | GCST004988 | GWAS Catalog | Breast cancer GWAS, 139,274 samples |
-
+```
 Full download instructions: [datasets/DATA_SOURCES.md](datasets/DATA_SOURCES.md)
 
 ## Tools and Software
+````
 
 | Tool | Version | Purpose |
 |------|---------|---------|
@@ -120,7 +130,7 @@ Full download instructions: [datasets/DATA_SOURCES.md](datasets/DATA_SOURCES.md)
 | multiMiR | 1.24 | miRNA interactions |
 | ChIPseeker | 1.38 | ChIP-seq annotation |
 | qqman | 0.1.9 | GWAS visualization |
-
+````
 ## How To Run
 
 ### Install R Packages
@@ -146,6 +156,7 @@ source("task7_multiomics_integration/scripts/Task7_integration.R")
 ```
 
 ## Results Summary
+```
 
 | Task | Output | Key Result |
 |------|--------|------------|
@@ -156,10 +167,10 @@ source("task7_multiomics_integration/scripts/Task7_integration.R")
 | Task 5 | DEG_ChIP_overlap.csv | 670 FOXA1-bound DEGs |
 | Task 6 | significant_SNPs.csv | 20,994 significant SNPs |
 | Task 7 | candidate_genes.csv | 624 candidate genes |
-
+```
 ## Authors
 
-- Abid Hussain — NUST University, Bioinformatics End Semester Project 2026
+- Abid Hussain — NUST University, Genomics End Semester Project 2026
 
 ## References
 
