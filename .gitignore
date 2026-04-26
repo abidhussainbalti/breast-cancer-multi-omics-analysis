@@ -1,0 +1,32 @@
+# Large raw data files - download links provided in DATA_SOURCES.md
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.sra
+*.bam
+*.bam.bai
+*.fa
+*.fa.gz
+*.fasta
+*.fasta.gz
+*.gtf
+*.gtf.gz
+*.bed.gz
+*.tsv.gz
+*.vcf
+*.vcf.gz
+
+# GWAS raw summary statistics (too large)
+29059683-GCST004988-*.tsv.gz
+
+# R temporary files
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini

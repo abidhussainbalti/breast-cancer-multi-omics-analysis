@@ -1,0 +1,136 @@
+# Breast Cancer Multi-Omics Analysis
+
+A comprehensive multi-omics bioinformatics pipeline for identifying key regulatory mechanisms in breast cancer using RNA-seq, ChIP-seq, GWAS, and ncRNA data integration.
+
+## Project Summary
+
+This project investigates the molecular mechanisms of breast cancer by integrating multiple genomic data types. Starting from raw RNA-seq reads, we identify differentially expressed genes, their regulatory miRNAs, transcription factor binding sites, and associated genetic variants — ultimately building a complete regulatory model of breast cancer.
+
+## Key Findings
+
+- **942 differentially expressed genes** identified between tumor and normal breast tissue
+- **Cell cycle pathway** most significantly enriched (KEGG hsa04110)
+- **2,534 miRNAs** regulate DEGs including tumor suppressors let-7 and miR-34a
+- **FOXA1 transcription factor** binds near 670 (71%) of all DEGs
+- **20,994 genome-wide significant SNPs** identified in breast cancer GWAS
+- **624 candidate genes** supported by all 4 omics evidence layers
+
+## Disease
+**Breast Cancer** — ER-positive breast carcinoma  
+Dataset: GSE183947 (30 tumor + 30 normal pairs, Guangzhou Medical University)
+
+## Pipeline Overview
+RNA-seq Raw Reads (GSE183947)
+↓ Task 1: STAR Alignment + featureCounts
+Count Matrix (59,251 genes × 12 samples)
+↓ Task 2: DESeq2
+942 Differentially Expressed Genes
+↓ Task 3: clusterProfiler
+304 GO Terms + 9 KEGG Pathways
+↓ Task 4: multiMiR
+90,452 miRNA-Gene Interactions
+↓ Task 5: ChIPseeker (FOXA1 ChIP-seq)
+670 DEGs bound by FOXA1
+↓ Task 6: GWAS Analysis
+20,994 Significant Breast Cancer SNPs
+↓ Task 7: Multi-Omics Integration
+624 Candidate Cancer Driver Genes
+
+## Repository Structure
+breast-cancer-multi-omics-analysis/
+├── README.md
+├── METHODOLOGY.md
+├── datasets/
+│   └── DATA_SOURCES.md
+├── task1_rnaseq_alignment_breast_cancer/
+├── task2_differential_gene_expression/
+├── task3_pathway_enrichment_analysis/
+├── task4_ncrna_mirna_regulatory_network/
+├── task5_chipseq_foxa1_binding_analysis/
+├── task6_gwas_breast_cancer_snp_analysis/
+├── task7_multiomics_integration/
+└── report/
+
+## Datasets Used
+
+| Task | Dataset | Source | Description |
+|---|---|---|---|
+| Task 1 | GSE183947 | NCBI GEO | Breast cancer RNA-seq, 12 samples |
+| Task 5 | ENCFF396BZQ | ENCODE | FOXA1 ChIP-seq in MCF-7 cells |
+| Task 6 | GCST004988 | GWAS Catalog | Breast cancer GWAS, 139,274 samples |
+
+Full download instructions: [datasets/DATA_SOURCES.md](datasets/DATA_SOURCES.md)
+
+## Tools and Software
+
+| Tool | Version | Purpose |
+|---|---|---|
+| Galaxy Project | usegalaxy.org | RNA-seq alignment pipeline |
+| RNA STAR | 2.7.11b | Read alignment |
+| featureCounts | 2.0.6 | Read quantification |
+| R | 4.3.3 | Statistical analysis |
+| DESeq2 | 1.42 | Differential expression |
+| clusterProfiler | 4.10 | Pathway enrichment |
+| multiMiR | 1.24 | miRNA interactions |
+| ChIPseeker | 1.38 | ChIP-seq annotation |
+| qqman | 0.1.9 | GWAS visualization |
+
+## How To Run
+
+### Requirements
+- R version 4.3.3 or higher
+- Bioconductor packages (see below)
+
+### Install R Packages
+```r
+install.packages("BiocManager")
+BiocManager::install(c("DESeq2", "clusterProfiler", "org.Hs.eg.db",
+                       "enrichplot", "ChIPseeker", "multiMiR",
+                       "TxDb.Hsapiens.UCSC.hg38.knownGene",
+                       "ggplot2", "pheatmap", "ggrepel",
+                       "dplyr", "qqman"))
+```
+
+### Run Analysis
+```r
+# Task 2 - Differential Expression
+source("task2_differential_gene_expression/scripts/Task2_DESeq2.R")
+
+# Task 3 - Pathway Enrichment
+source("task3_pathway_enrichment_analysis/scripts/Task3_enrichment.R")
+
+# Task 4 - ncRNA Analysis
+source("task4_ncrna_mirna_regulatory_network/scripts/Task4_ncRNA.R")
+
+# Task 5 - ChIP-seq Analysis
+source("task5_chipseq_foxa1_binding_analysis/scripts/Task5_ChIPseq.R")
+
+# Task 6 - GWAS Analysis
+source("task6_gwas_breast_cancer_snp_analysis/scripts/Task6_GWAS.R")
+
+# Task 7 - Integration
+source("task7_multiomics_integration/scripts/Task7_integration.R")
+```
+
+## Results Summary
+
+| Task | Output | Key Result |
+|---|---|---|
+| Task 1 | FeatureCounts_Mod.txt | 59,251 genes quantified |
+| Task 2 | DEG_results.csv | 942 significant DEGs |
+| Task 3 | GO_results.csv, KEGG_results.csv | Cell cycle most enriched |
+| Task 4 | ncRNA_interactions.csv | 90,452 miRNA interactions |
+| Task 5 | DEG_ChIP_overlap.csv | 670 FOXA1-bound DEGs |
+| Task 6 | significant_SNPs.csv | 20,994 significant SNPs |
+| Task 7 | candidate_genes.csv | 624 candidate genes |
+
+## Authors
+- Abid Hussain
+- NUST University — Bioinformatics End Semester Project 2026
+
+## References
+1. Zhang Y et al. (2021) Front Genet. GSE183947
+2. Michailidou K et al. (2017) Nature. GCST004988
+3. ENCODE Project. ENCFF396BZQ
+4. Love MI et al. (2014) DESeq2. Genome Biology
+5. Yu G et al. (2012) clusterProfiler. OMICS
