@@ -38,7 +38,7 @@ Count Matrix (59,251 genes x 12 samples)
 624 Candidate Cancer Driver Genes
 
 ## Repository Structure
-'''breast-cancer-multi-omics-analysis/
+````breast-cancer-multi-omics-analysis/
 ├── README.md
 ├── METHODOLOGY.md
 ├── .gitignore
@@ -95,7 +95,7 @@ Count Matrix (59,251 genes x 12 samples)
 │       ├── candidate_genes.csv
 │       ├── integrated_evidence_table.csv
 │       └── eQTL_diagram.png
-└── report/'''
+└── report````
 
 ## Datasets Used
 
