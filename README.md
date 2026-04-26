@@ -56,58 +56,62 @@
 ---
 
 ## 🔄 Pipeline Overview
+
+```text
 +--------------------------------------------------+
 |       RNA-seq Raw Reads (GSE183947)              |
 |       12 samples: 6 tumor + 6 normal             |
 +--------------------------------------------------+
-|
-v
+                        |
+                        v
 +--------------------------------------------------+
 |  Task 1: Alignment and Quantification            |
 |  Tools : STAR v2.7.11b + featureCounts           |
 |  Output: Count Matrix (59,251 genes x 12 samples)|
 +--------------------------------------------------+
-|
-v
+                        |
+                        v
 +--------------------------------------------------+
 |  Task 2: Differential Gene Expression            |
 |  Tool  : DESeq2                                  |
 |  Output: 942 significant DEGs (padj < 0.01)      |
 +--------------------------------------------------+
-|
-v
+                        |
+                        v
 +--------------------------------------------------+
 |  Task 3: Pathway Enrichment Analysis             |
 |  Tool  : clusterProfiler                         |
 |  Output: 304 GO Terms + 9 KEGG Pathways          |
 +--------------------------------------------------+
-|
-v
+                        |
+                        v
 +--------------------------------------------------+
 |  Task 4: ncRNA Regulatory Network                |
 |  Tool  : multiMiR                                |
 |  Output: 90,452 miRNA-Gene Interactions          |
 +--------------------------------------------------+
-|
-v
+                        |
+                        v
 +--------------------------------------------------+
 |  Task 5: ChIP-seq Binding Analysis               |
 |  Tool  : ChIPseeker (FOXA1 ENCODE dataset)       |
 |  Output: 670 DEGs bound by FOXA1                 |
 +--------------------------------------------------+
-|
-v
+                        |
+                        v
 +--------------------------------------------------+
 |  Task 6: GWAS SNP Analysis                       |
 |  Tool  : qqman                                   |
 |  Output: 20,994 Significant Breast Cancer SNPs   |
 +--------------------------------------------------+
-|
-v
+                        |
+                        v
 +--------------------------------------------------+
 |  Task 7: Multi-Omics Integration                 |
 |  Output: 624 Candidate Cancer Driver Genes       |
 +--------------------------------------------------+
+```
+
 
 ---
 
