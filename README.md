@@ -30,24 +30,68 @@ Dataset: GSE183947 (30 tumor + 30 normal pairs, Guangzhou Medical University)
 
 ## Pipeline Overview
 ```
-RNA-seq Raw Reads (GSE183947)
-↓ Task 1: STAR Alignment + featureCounts
-Count Matrix (59,251 genes x 12 samples)
-↓ Task 2: DESeq2
-942 Differentially Expressed Genes
-↓ Task 3: clusterProfiler
-304 GO Terms + 9 KEGG Pathways
-↓ Task 4: multiMiR
-90,452 miRNA-Gene Interactions
-↓ Task 5: ChIPseeker (FOXA1 ChIP-seq)
-670 DEGs bound by FOXA1
-↓ Task 6: GWAS Analysis
-20,994 Significant Breast Cancer SNPs
-↓ Task 7: Multi-Omics Integration
-624 Candidate Cancer Driver Genes
+## 🔄 Multi-Omics Analysis Workflow
+
+```text
+┌──────────────────────────────────────────────┐
+│           RNA-seq Raw Reads                  │
+│               (GSE183947)                    │
+└──────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────┐
+│ Task 1: Alignment & Quantification           │
+│ Tool: STAR + featureCounts                  │
+│ Output: Count Matrix                        │
+│         (59,251 genes × 12 samples)         │
+└──────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────┐
+│ Task 2: Differential Expression              │
+│ Tool: DESeq2                                │
+│ Output: 942 DEGs                            │
+└──────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────┐
+│ Task 3: Pathway Enrichment                   │
+│ Tool: clusterProfiler                       │
+│ Output: 304 GO Terms                        │
+│         9 KEGG Pathways                     │
+└──────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────┐
+│ Task 4: Regulatory Network Analysis          │
+│ Tool: multiMiR                              │
+│ Output: 90,452 miRNA–Gene Interactions      │
+└──────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────┐
+│ Task 5: ChIP-seq Integration                │
+│ Tool: ChIPseeker (FOXA1)                    │
+│ Output: 670 DEGs bound by FOXA1             │
+└──────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────┐
+│ Task 6: GWAS SNP Analysis                   │
+│ Output: 20,994 Significant SNPs             │
+└──────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────┐
+│ Task 7: Multi-Omics Integration             │
+│ Output: 624 Candidate Driver Genes          │
+└──────────────────────────────────────────────┘
+```
+
 ```
 ## Repository Structure
-```breast-cancer-multi-omics-analysis/
+```
+breast-cancer-multi-omics-analysis/
 ├── README.md
 ├── METHODOLOGY.md
 ├── .gitignore
@@ -104,7 +148,8 @@ Count Matrix (59,251 genes x 12 samples)
 │       ├── candidate_genes.csv
 │       ├── integrated_evidence_table.csv
 │       └── eQTL_diagram.png
-└── report```
+└── report
+```
 
 ## Datasets Used
 ```
