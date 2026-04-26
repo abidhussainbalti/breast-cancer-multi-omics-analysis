@@ -5,7 +5,6 @@
 ---
 
 ## 📋 Table of Contents
-
 - [Project Summary](#project-summary)
 - [Key Findings](#key-findings)
 - [Disease Background](#disease-background)
@@ -24,13 +23,13 @@
 
 | Step | Task | Description |
 |------|------|-------------|
-| 1️⃣ | RNA-seq Alignment and Quantification | Processing raw sequencing reads and generating gene count matrix |
-| 2️⃣ | Differential Gene Expression | Identifying significantly upregulated and downregulated genes |
-| 3️⃣ | Functional Enrichment Analysis | Discovering biological processes and pathways associated with DEGs |
-| 4️⃣ | ncRNA-miRNA Regulatory Network | Mapping regulatory interactions between miRNAs and target genes |
-| 5️⃣ | ChIP-seq Binding Analysis | Identifying FOXA1 transcription factor binding sites |
-| 6️⃣ | GWAS SNP Analysis | Detecting significant genetic variants associated with breast cancer |
-| 7️⃣ | Multi-Omics Integration | Combining all datasets to identify candidate cancer driver genes |
+| 1 | RNA-seq Alignment and Quantification | Processing raw sequencing reads and generating gene count matrix |
+| 2 | Differential Gene Expression | Identifying significantly upregulated and downregulated genes |
+| 3 | Functional Enrichment Analysis | Discovering biological processes and pathways associated with DEGs |
+| 4 | ncRNA-miRNA Regulatory Network | Mapping regulatory interactions between miRNAs and target genes |
+| 5 | ChIP-seq Binding Analysis | Identifying FOXA1 transcription factor binding sites |
+| 6 | GWAS SNP Analysis | Detecting significant genetic variants associated with breast cancer |
+| 7 | Multi-Omics Integration | Combining all datasets to identify candidate cancer driver genes |
 
 ---
 
@@ -57,130 +56,38 @@
 ---
 
 ## 🔄 Pipeline Overview
-┌─────────────────────────────────────────────────┐
-│         RNA-seq Raw Reads (GSE183947)           │
-│         12 samples: 6 tumor + 6 normal          │
-└─────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────┐
-│  Task 1: Alignment and Quantification           │
-│  Tools : STAR v2.7.11b + featureCounts          │
-│  Output: Count Matrix (59,251 genes x 12 samples)│
-└─────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────┐
-│  Task 2: Differential Gene Expression           │
-│  Tool  : DESeq2                                 │
-│  Output: 942 significant DEGs (padj < 0.01)     │
-└─────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────┐
-│  Task 3: Pathway Enrichment Analysis            │
-│  Tool  : clusterProfiler                        │
-│  Output: 304 GO Terms + 9 KEGG Pathways         │
-└─────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────┐
-│  Task 4: ncRNA Regulatory Network               │
-│  Tool  : multiMiR                               │
-│  Output: 90,452 miRNA-Gene Interactions         │
-└─────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────┐
-│  Task 5: ChIP-seq Binding Analysis              │
-│  Tool  : ChIPseeker (FOXA1 ENCODE dataset)      │
-│  Output: 670 DEGs bound by FOXA1                │
-└─────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────┐
-│  Task 6: GWAS SNP Analysis                      │
-│  Tool  : qqman                                  │
-│  Output: 20,994 Significant Breast Cancer SNPs  │
-└─────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────┐
-│  Task 7: Multi-Omics Integration                │
-│  Output: 624 Candidate Cancer Driver Genes      │
-└─────────────────────────────────────────────────┘
+
+**RNA-seq Raw Reads (GSE183947)** — 12 samples: 6 tumor + 6 normal
+
+&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 1** — STAR Alignment + featureCounts → Count Matrix (59,251 genes x 12 samples)
+
+&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 2** — DESeq2 → 942 significant DEGs (padj < 0.01)
+
+&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 3** — clusterProfiler → 304 GO Terms + 9 KEGG Pathways
+
+&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 4** — multiMiR → 90,452 miRNA-Gene Interactions
+
+&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 5** — ChIPseeker (FOXA1 ChIP-seq) → 670 DEGs bound by FOXA1
+
+&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 6** — qqman (GWAS) → 20,994 Significant Breast Cancer SNPs
+
+&nbsp;&nbsp;&nbsp;&nbsp;↓ **Task 7** — Multi-Omics Integration → 624 Candidate Cancer Driver Genes
 
 ---
 
 ## 📁 Repository Structure
-breast-cancer-multi-omics-analysis/
-│
-├── README.md
-├── METHODOLOGY.md
-├── .gitignore
-│
-├── datasets/
-│   └── DATA_SOURCES.md
-│
-├── task1_rnaseq_alignment_breast_cancer/
-│   ├── scripts/
-│   │   └── Galaxy_workflow_Task1.ga
-│   └── results/
-│       └── FeatureCounts_Mod.txt
-│
-├── task2_differential_gene_expression/
-│   ├── scripts/
-│   │   └── Task2_DESeq2.R
-│   └── results/
-│       ├── DEG_results.csv
-│       ├── Top20_DEGs.csv
-│       ├── volcano_plot.png
-│       └── heatmap.png
-│
-├── task3_pathway_enrichment_analysis/
-│   ├── scripts/
-│   │   └── Task3_enrichment.R
-│   └── results/
-│       ├── GO_results.csv
-│       ├── KEGG_results.csv
-│       ├── GO_barplot.png
-│       └── KEGG_dotplot.png
-│
-├── task4_ncrna_mirna_regulatory_network/
-│   ├── scripts/
-│   │   └── Task4_ncRNA.R
-│   └── results/
-│       ├── ncRNA_interactions.csv
-│       ├── ncRNA_list.csv
-│       └── network.png
-│
-├── task5_chipseq_foxa1_binding_analysis/
-│   ├── scripts/
-│   │   └── Task5_ChIPseek.R
-│   └── results/
-│       ├── annotated_peaks.csv
-│       ├── DEG_ChIP_overlap.csv
-│       ├── peak_annotation_pie.png
-│       ├── peak_annotation_bar.png
-│       └── overlap_annotation.png
-│
-├── task6_gwas_breast_cancer_snp_analysis/
-│   ├── scripts/
-│   │   └── Task6_GWAS.R
-│   └── results/
-│       ├── significant_SNPs.csv
-│       ├── manhattan_plot.png
-│       └── QQ_plot.png
-│
-├── task7_multiomics_integration/
-│   ├── scripts/
-│   │   └── Task7_integration.R
-│   └── results/
-│       ├── candidate_genes.csv
-│       ├── integrated_evidence_table.csv
-│       └── eQTL_diagram.png
-│
-└── report/
+
+| Folder | Contents |
+|--------|----------|
+| `datasets/` | DATA_SOURCES.md with all download links |
+| `task1_rnaseq_alignment_breast_cancer/` | Galaxy workflow + FeatureCounts_Mod.txt |
+| `task2_differential_gene_expression/` | DESeq2 script + DEGs + volcano plot + heatmap |
+| `task3_pathway_enrichment_analysis/` | Enrichment script + GO/KEGG results + plots |
+| `task4_ncrna_mirna_regulatory_network/` | ncRNA script + interaction tables + network plot |
+| `task5_chipseq_foxa1_binding_analysis/` | ChIPseeker script + peak annotations + overlap |
+| `task6_gwas_breast_cancer_snp_analysis/` | GWAS script + significant SNPs + Manhattan plot |
+| `task7_multiomics_integration/` | Integration script + candidate genes + eQTL diagram |
+| `report/` | Final project report (PDF) |
 
 ---
 
