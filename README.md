@@ -16,13 +16,14 @@ This project investigates the molecular mechanisms of breast cancer by integrati
 - **624 candidate genes** supported by all 4 omics evidence layers
 
 ## Disease
-**Breast Cancer** — ER-positive breast carcinoma  
+
+**Breast Cancer** — ER-positive breast carcinoma
 Dataset: GSE183947 (30 tumor + 30 normal pairs, Guangzhou Medical University)
 
 ## Pipeline Overview
 RNA-seq Raw Reads (GSE183947)
 ↓ Task 1: STAR Alignment + featureCounts
-Count Matrix (59,251 genes × 12 samples)
+Count Matrix (59,251 genes x 12 samples)
 ↓ Task 2: DESeq2
 942 Differentially Expressed Genes
 ↓ Task 3: clusterProfiler
@@ -40,21 +41,66 @@ Count Matrix (59,251 genes × 12 samples)
 breast-cancer-multi-omics-analysis/
 ├── README.md
 ├── METHODOLOGY.md
+├── .gitignore
 ├── datasets/
 │   └── DATA_SOURCES.md
 ├── task1_rnaseq_alignment_breast_cancer/
+│   ├── scripts/
+│   │   └── Galaxy_workflow_Task1.ga
+│   └── results/
+│       └── FeatureCounts_Mod.txt
 ├── task2_differential_gene_expression/
+│   ├── scripts/
+│   │   └── Task2_DESeq2.R
+│   └── results/
+│       ├── DEG_results.csv
+│       ├── Top20_DEGs.csv
+│       ├── volcano_plot.png
+│       └── heatmap.png
 ├── task3_pathway_enrichment_analysis/
+│   ├── scripts/
+│   │   └── Task3_enrichment.R
+│   └── results/
+│       ├── GO_results.csv
+│       ├── KEGG_results.csv
+│       ├── GO_barplot.png
+│       └── KEGG_dotplot.png
 ├── task4_ncrna_mirna_regulatory_network/
+│   ├── scripts/
+│   │   └── Task4_ncRNA.R
+│   └── results/
+│       ├── ncRNA_interactions.csv
+│       ├── ncRNA_list.csv
+│       └── network.png
 ├── task5_chipseq_foxa1_binding_analysis/
+│   ├── scripts/
+│   │   └── Task5_ChIPseq.R
+│   └── results/
+│       ├── annotated_peaks.csv
+│       ├── DEG_ChIP_overlap.csv
+│       ├── peak_annotation_pie.png
+│       ├── peak_annotation_bar.png
+│       └── overlap_annotation.png
 ├── task6_gwas_breast_cancer_snp_analysis/
+│   ├── scripts/
+│   │   └── Task6_GWAS.R
+│   └── results/
+│       ├── significant_SNPs.csv
+│       ├── manhattan_plot.png
+│       └── QQ_plot.png
 ├── task7_multiomics_integration/
+│   ├── scripts/
+│   │   └── Task7_integration.R
+│   └── results/
+│       ├── candidate_genes.csv
+│       ├── integrated_evidence_table.csv
+│       └── eQTL_diagram.png
 └── report/
 
 ## Datasets Used
 
 | Task | Dataset | Source | Description |
-|---|---|---|---|
+|------|---------|--------|-------------|
 | Task 1 | GSE183947 | NCBI GEO | Breast cancer RNA-seq, 12 samples |
 | Task 5 | ENCFF396BZQ | ENCODE | FOXA1 ChIP-seq in MCF-7 cells |
 | Task 6 | GCST004988 | GWAS Catalog | Breast cancer GWAS, 139,274 samples |
@@ -64,7 +110,7 @@ Full download instructions: [datasets/DATA_SOURCES.md](datasets/DATA_SOURCES.md)
 ## Tools and Software
 
 | Tool | Version | Purpose |
-|---|---|---|
+|------|---------|---------|
 | Galaxy Project | usegalaxy.org | RNA-seq alignment pipeline |
 | RNA STAR | 2.7.11b | Read alignment |
 | featureCounts | 2.0.6 | Read quantification |
@@ -77,11 +123,8 @@ Full download instructions: [datasets/DATA_SOURCES.md](datasets/DATA_SOURCES.md)
 
 ## How To Run
 
-### Requirements
-- R version 4.3.3 or higher
-- Bioconductor packages (see below)
-
 ### Install R Packages
+
 ```r
 install.packages("BiocManager")
 BiocManager::install(c("DESeq2", "clusterProfiler", "org.Hs.eg.db",
@@ -92,30 +135,20 @@ BiocManager::install(c("DESeq2", "clusterProfiler", "org.Hs.eg.db",
 ```
 
 ### Run Analysis
+
 ```r
-# Task 2 - Differential Expression
 source("task2_differential_gene_expression/scripts/Task2_DESeq2.R")
-
-# Task 3 - Pathway Enrichment
 source("task3_pathway_enrichment_analysis/scripts/Task3_enrichment.R")
-
-# Task 4 - ncRNA Analysis
 source("task4_ncrna_mirna_regulatory_network/scripts/Task4_ncRNA.R")
-
-# Task 5 - ChIP-seq Analysis
 source("task5_chipseq_foxa1_binding_analysis/scripts/Task5_ChIPseq.R")
-
-# Task 6 - GWAS Analysis
 source("task6_gwas_breast_cancer_snp_analysis/scripts/Task6_GWAS.R")
-
-# Task 7 - Integration
 source("task7_multiomics_integration/scripts/Task7_integration.R")
 ```
 
 ## Results Summary
 
 | Task | Output | Key Result |
-|---|---|---|
+|------|--------|------------|
 | Task 1 | FeatureCounts_Mod.txt | 59,251 genes quantified |
 | Task 2 | DEG_results.csv | 942 significant DEGs |
 | Task 3 | GO_results.csv, KEGG_results.csv | Cell cycle most enriched |
@@ -125,12 +158,13 @@ source("task7_multiomics_integration/scripts/Task7_integration.R")
 | Task 7 | candidate_genes.csv | 624 candidate genes |
 
 ## Authors
-- Abid Hussain
-- NUST University — Bioinformatics End Semester Project 2026
+
+- Abid Hussain — NUST University, Bioinformatics End Semester Project 2026
 
 ## References
-1. Zhang Y et al. (2021) Front Genet. GSE183947
-2. Michailidou K et al. (2017) Nature. GCST004988
-3. ENCODE Project. ENCFF396BZQ
+
+1. Zhang Y et al. (2021) Front Genet. GSE183947. PMID: 35046993
+2. Michailidou K et al. (2017) Nature. GCST004988. PMID: 29059683
+3. ENCODE Project Consortium. ENCFF396BZQ
 4. Love MI et al. (2014) DESeq2. Genome Biology
 5. Yu G et al. (2012) clusterProfiler. OMICS
